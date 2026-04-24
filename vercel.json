@@ -4,16 +4,5 @@
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "vite",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ],
-  "functions": {
-    "api/*": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  "framework": "vite"
 }
