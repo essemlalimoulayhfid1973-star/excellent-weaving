@@ -7,7 +7,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/checkout" element={<Home />} />
       </Routes>
     </Router>
   );
