@@ -5,26 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تعاونية النسيج الممتاز | Excellent Textile Cooperative Amizmiz</title>
     <meta name="description" content="زربية وتصاميم أطلسية فاخرة صناعة يدوية من قلب أمزميز. شحن دولي لـ لندن، دبي، نيويورك.">
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Montserrat', 'Cairo', sans-serif; 
-            background: #F5E6D3; /* Atlas Sand */
+            background: #F5E6D3;
             min-height: 100vh;
-            color: #1B263B; /* Deep Indigo */
+            color: #1B263B;
         }
-        
-        /* Luxury Earthy Palette */
         :root {
             --royal-saffron: #C18E3A;
             --deep-indigo: #1B263B;
             --atlas-sand: #F5E6D3;
             --white: #FFFFFF;
-            --gold: #D4AF37;
         }
-        
         .header { 
             background: linear-gradient(135deg, var(--deep-indigo), #2c3e5c); 
             color: white; 
@@ -46,20 +41,16 @@
             font-family: 'Playfair Display', serif;
             font-size: 36px; 
             margin-bottom: 10px;
-            letter-spacing: 1px;
         }
         .header h1 span { color: var(--royal-saffron); }
         .header p { font-size: 18px; opacity: 0.9; }
-        
         .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
-        
         .section-title { 
             text-align: center; 
             font-family: 'Playfair Display', serif;
             font-size: 32px; 
             color: var(--deep-indigo); 
             margin: 40px 0 20px;
-            position: relative;
             display: inline-block;
             width: 100%;
         }
@@ -71,7 +62,6 @@
             background: var(--royal-saffron);
             margin: 15px auto 0;
         }
-        
         .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
         .card { 
             background: var(--white); 
@@ -87,14 +77,15 @@
             box-shadow: 0 25px 45px rgba(0,0,0,0.12);
             border-color: var(--royal-saffron);
         }
+        .card-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; background: #F5E6D3; }
         .card-icon { font-size: 70px; margin-bottom: 15px; }
         .card h3 { 
             font-family: 'Playfair Display', serif;
-            font-size: 22px; 
+            font-size: 20px; 
             margin-bottom: 8px;
             color: var(--deep-indigo);
         }
-        .price { color: var(--royal-saffron); font-size: 26px; font-weight: bold; margin: 12px 0; }
+        .price { color: var(--royal-saffron); font-size: 24px; font-weight: bold; margin: 12px 0; }
         .price small { font-size: 14px; font-weight: normal; }
         .btn-add { 
             background: var(--deep-indigo); 
@@ -109,7 +100,6 @@
             width: 100%;
         }
         .btn-add:hover { background: var(--royal-saffron); transform: scale(1.02); }
-        
         .story { 
             background: var(--white); 
             border-radius: 24px; 
@@ -126,7 +116,6 @@
             font-size: 28px;
             margin-bottom: 20px;
         }
-        
         .quality-badge {
             background: linear-gradient(135deg, var(--deep-indigo), #2c3e5c);
             color: white;
@@ -138,7 +127,6 @@
         .quality-badge h4 { font-size: 22px; margin-bottom: 15px; font-family: 'Playfair Display', serif; }
         .quality-badge p { font-size: 14px; opacity: 0.9; }
         .quality-badge span { color: var(--royal-saffron); font-weight: bold; }
-        
         .cart { 
             position: fixed; 
             bottom: 25px; 
@@ -158,7 +146,6 @@
         }
         .cart:hover { background: var(--royal-saffron); transform: scale(1.03); }
         .cart-count { background: var(--royal-saffron); border-radius: 50%; padding: 2px 10px; }
-        
         .whatsapp-btn { 
             background: #25D366; 
             color: white; 
@@ -173,11 +160,9 @@
             transition: all 0.3s;
             box-shadow: 0 4px 12px rgba(37,211,102,0.3);
         }
-        .whatsapp-btn:hover { transform: scale(1.02); box-shadow: 0 6px 16px rgba(37,211,102,0.4); }
-        
+        .whatsapp-btn:hover { transform: scale(1.02); }
         footer { text-align: center; padding: 40px; background: var(--deep-indigo); color: var(--atlas-sand); margin-top: 60px; }
         footer a { color: var(--royal-saffron); text-decoration: none; }
-        
         @media (max-width: 768px) {
             .header h1 { font-size: 24px; }
             .section-title { font-size: 26px; }
@@ -196,7 +181,6 @@
     <h2 class="section-title">🌟 منتجاتنا المميزة</h2>
     <div class="products" id="products"></div>
 
-    <!-- Quality Promise Badge -->
     <div class="quality-badge">
         <h4>⭐ وعد الجودة - Our Quality Promise</h4>
         <p>كل قطعة تمر بـ 3 مراحل فحص دقيقة (فحص الصوف، دقة النسيج، واللمسات النهائية) قبل أن تغادر أمزميز، لضمان وصول تحفة فنية لا تشوبها شائبة إلى منزلك.</p>
@@ -205,7 +189,7 @@
 
     <div class="story">
         <h3>🏔️ من أعماق الأطلس إلى عالمك</h3>
-        <p>من أعماق جبال الأطلس، وتحديداً من منطقة الحوز ومدينة أمزميز، انطلقت قصتنا. نساء أمزميز هن حارسات التراث الأمازيغي الأصيل. كل زربية وكل قطعة نسيج تحمل في طياتها قصة وحكاية وأحلام نساء قضين ساعات طويلة أمام النول لنسج أجمل المنتجات اليدوية. تعاونيتنا ليست مجرد مشروع تجاري، بل هي رسالة حب وتراث وصمود. نصنع المجد خيطاً خيطاً، ونرسل روح الأطلس إلى منازل الفاخرة حول العالم.</p>
+        <p>من أعماق جبال الأطلس، وتحديداً من منطقة الحوز ومدينة أمزميز، انطلقت قصتنا. نساء أمزميز هن حارسات التراث الأمازيغي الأصيل. كل زربية وكل قطعة نسيج تحمل في طياتها قصة وحكاية وأحلام نساء قضين ساعات طويلة أمام النول لنسج أجمل المنتجات اليدوية. تعاونيتنا ليست مجرد مشروع تجاري، بل هي رسالة حب وتراث وصمود.</p>
     </div>
 
     <div style="text-align:center; margin: 40px 0;">
@@ -217,7 +201,7 @@
     <p>📍 أمزميز، جبال الأطلس، المغرب</p>
     <p>📞 واتساب: <a href="https://wa.me/212639674902">+212 639 674902</a></p>
     <p>✈️ شحن دولي | 🧵 صناعة يدوية 100% | 🤝 دعم الحرفيات</p>
-    <p style="margin-top: 15px; font-size: 12px;">© 2025 تعاونية النسيج الممتاز - Excellent Textile Cooperative Amizmiz</p>
+    <p>© 2025 تعاونية النسيج الممتاز - Excellent Textile Cooperative Amizmiz</p>
 </footer>
 
 <div class="cart" id="cartBtn">
@@ -226,12 +210,12 @@
 
 <script>
     const products = [
-        { id: 1, name: 'زربية أمازيغية أصلية', price: 2500, icon: '🪢', description: 'صوف طبيعي - صناعة يدوية' },
-        { id: 2, name: 'وسادة بربرية فاخرة', price: 350, icon: '🛋️', description: 'تطريز يدوي - ألوان طبيعية' },
-        { id: 3, name: 'غطاء صوف أطلس', price: 1800, icon: '🛌', description: 'دافئ - فاخر - ناعم' },
-        { id: 4, name: 'شال أمازيغي', price: 450, icon: '🧣', description: 'حرير وصوف - لمسة أنيقة' },
-        { id: 5, name: 'سجادة ممر أمزميز', price: 1200, icon: '🔴', description: 'مثالية للممرات والمداخل' },
-        { id: 6, name: 'معلقة حائط تراثية', price: 850, icon: '🖼️', description: 'زينة جدارية فريدة' }
+        { id: 1, name: 'زربية أمازيغية - تعاونية النسيج الممتاز', price: 5500, image: 'IMG_20260425_023134.jpg', description: 'صوف طبيعي 100%، نسج يدوي، تصميم تقليدي أصيل' },
+        { id: 2, name: 'وسادة بربرية فاخرة', price: 350, image: '', description: 'تطريز يدوي - ألوان طبيعية' },
+        { id: 3, name: 'غطاء صوف أطلس', price: 1800, image: '', description: 'دافئ - فاخر - ناعم' },
+        { id: 4, name: 'شال أمازيغي', price: 450, image: '', description: 'حرير وصوف - لمسة أنيقة' },
+        { id: 5, name: 'سجادة ممر أمزميز', price: 1200, image: '', description: 'مثالية للممرات والمداخل' },
+        { id: 6, name: 'معلقة حائط تراثية', price: 850, image: '', description: 'زينة جدارية فريدة' }
     ];
 
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -264,7 +248,7 @@
         products.forEach(product => {
             productsDiv.innerHTML += `
                 <div class="card">
-                    <div class="card-icon">${product.icon}</div>
+                    ${product.image ? `<img src="/${product.image}" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="card-icon" style="display:none">🪢</div>` : `<div class="card-icon">🪢</div>`}
                     <h3>${product.name}</h3>
                     <p style="font-size: 13px; color: #888; margin-bottom: 8px;">${product.description}</p>
                     <div class="price">${product.price.toLocaleString()} <small>د.م.</small></div>
@@ -297,7 +281,7 @@
         window.open(`https://wa.me/212639674902?text=${encodeURIComponent(message)}`, '_blank');
         cart = [];
         saveCart();
-        alert('✅ تم إرسال طلبك بنجاح! سيتم التواصل معك خلال 24 ساعة لتأكيد التفاصيل.');
+        alert('✅ تم إرسال طلبك بنجاح! سيتم التواصل معك خلال 24 ساعة.');
     };
 
     document.getElementById('whatsappBtn').onclick = (e) => {
@@ -307,7 +291,7 @@
         let message = '🌿 السلام عليكم ورحمة الله وبركاتة 🌿\n📋 استفسار من موقع تعاونية النسيج الممتاز - أمزميز\n━━━━━━━━━━━━━━━━━━━━━\n';
         if (name) message += `\n👤 الاسم: ${name}`;
         if (phone) message += `\n📞 الهاتف: ${phone}`;
-        message += `\n📦 أود الاستفسار عن منتجاتكم الفاخرة (زرابي، وسائد، أغطية).\n━━━━━━━━━━━━━━━━━━━━━\n✨ نشكركم على حسن تعاونكم.`;
+        message += `\n📦 أود الاستفسار عن منتجاتكم الفاخرة.\n━━━━━━━━━━━━━━━━━━━━━\n✨ نشكركم على حسن تعاونكم.`;
         window.open(`https://wa.me/212639674902?text=${encodeURIComponent(message)}`, '_blank');
     };
 </script>
