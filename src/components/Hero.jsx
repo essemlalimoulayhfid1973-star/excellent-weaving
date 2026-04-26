@@ -33,6 +33,16 @@ export default function Hero() {
             Handwoven Moroccan Rugs
           </h1>
           <p style={{
+  fontSize: '20px',
+  fontStyle: 'italic',
+  color: '#C18E3A',
+  marginBottom: '20px',
+  fontWeight: '500'
+}}>
+  Three Unique Designs, One Authentic Tradition.<br />
+  Woven in the Atlas Mountains
+</p>
+          <p style={{
             fontSize: '18px',
             color: '#4A5568',
             marginBottom: '30px',
@@ -107,3 +117,4 @@ export default function Hero() {
     </section>
   );
                                       }
+
