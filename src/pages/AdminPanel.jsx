@@ -4,7 +4,17 @@ import { useNavigate } from 'react-router-dom';
 export default function AdminPanel() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({ name: '', price: '', description: '', image: '' });
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    nameFr: '',
+    nameEn: '',
+    price: '',
+    description: '',
+    descriptionFr: '',
+    descriptionEn: '',
+    image: '',
+    category: ''
+  });
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -14,7 +24,7 @@ export default function AdminPanel() {
       setIsAuthenticated(true);
       localStorage.setItem('adminAuth', 'true');
     } else {
-      alert('كلمة السر غلط');
+      alert('كلمة السر غير صحيحة');
     }
   };
 
@@ -27,7 +37,6 @@ export default function AdminPanel() {
   useEffect(() => {
     const auth = localStorage.getItem('adminAuth');
     if (auth === 'true') setIsAuthenticated(true);
-
     const stored = localStorage.getItem('tisaj_products');
     if (stored) setProducts(JSON.parse(stored));
   }, []);
@@ -36,14 +45,25 @@ export default function AdminPanel() {
     localStorage.setItem('tisaj_products', JSON.stringify(products));
   }, [products]);
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewProduct({ ...newProduct, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const addProduct = () => {
     if (!newProduct.name || !newProduct.price) {
       alert('الاسم والسعر مطلوبين');
       return;
     }
-    setProducts([...products, { ...newProduct, id: Date.now(), image: newProduct.image || '🧵' }]);
-    setNewProduct({ name: '', price: '', description: '', image: '' });
-    alert('تمت الإضافة');
+    setProducts([...products, { ...newProduct, id: Date.now() }]);
+    setNewProduct({ name: '', nameFr: '', nameEn: '', price: '', description: '', descriptionFr: '', descriptionEn: '', image: '', category: '' });
+    alert('✅ تمت إضافة المنتج');
   };
 
   const deleteProduct = (id) => {
@@ -66,26 +86,41 @@ export default function AdminPanel() {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h1>🧵 لوحة التحكم</h1>
-        <button onClick={logout}>تسجيل خروج</button>
+    <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1>🧵 لوحة تحكم التعاونية</h1>
+        <button onClick={logout} style={{ background: '#8B0000', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px' }}>تسجيل خروج</button>
       </div>
 
-      <div style={{ border: '1px solid #ddd', padding: '20px', margin: '20px 0' }}>
-        <h3>إضافة منتج</h3>
-        <input type="text" placeholder="الاسم" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} style={{ width: '100%', margin: '5px 0', padding: '8px' }} />
-        <input type="number" placeholder="السعر" value={newProduct.price} onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} style={{ width: '100%', margin: '5px 0', padding: '8px' }} />
-        <textarea placeholder="الوصف" value={newProduct.description} onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} rows="2" style={{ width: '100%', margin: '5px 0', padding: '8px' }} />
-        <button onClick={addProduct}>➕ إضافة</button>
+      <div style={{ border: '1px solid #ddd', padding: '20px', margin: '20px 0', borderRadius: '12px' }}>
+        <h3>➕ إضافة منتج جديد</h3>
+        
+        <input type="text" placeholder="الاسم (عربي)" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        <input type="text" placeholder="Nom (Français)" value={newProduct.nameFr} onChange={(e) => setNewProduct({ ...newProduct, nameFr: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        <input type="text" placeholder="Name (English)" value={newProduct.nameEn} onChange={(e) => setNewProduct({ ...newProduct, nameEn: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        
+        <input type="number" placeholder="السعر (درهم)" value={newProduct.price} onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        
+        <textarea placeholder="الوصف (عربي)" value={newProduct.description} onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} rows="2" style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        <textarea placeholder="Description (Français)" value={newProduct.descriptionFr} onChange={(e) => setNewProduct({ ...newProduct, descriptionFr: e.target.value })} rows="2" style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        <textarea placeholder="Description (English)" value={newProduct.descriptionEn} onChange={(e) => setNewProduct({ ...newProduct, descriptionEn: e.target.value })} rows="2" style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        
+        <input type="file" accept="image/*" onChange={handleImageUpload} style={{ margin: '10px 0' }} />
+        {newProduct.image && <img src={newProduct.image} alt="preview" style={{ width: '100px', marginTop: '10px' }} />}
+        
+        <button onClick={addProduct} style={{ background: '#28A745', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '8px', marginTop: '10px' }}>💾 حفظ المنتج</button>
       </div>
 
+      <h3>📦 المنتجات الحالية ({products.length})</h3>
       {products.map(p => (
-        <div key={p.id} style={{ borderBottom: '1px solid #ddd', padding: '10px', display: 'flex', justifyContent: 'space-between' }}>
-          <div>{p.name} - {p.price} د.م.</div>
-          <button onClick={() => deleteProduct(p.id)}>🗑️ حذف</button>
+        <div key={p.id} style={{ borderBottom: '1px solid #ddd', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            {p.image && <img src={p.image} alt={p.name} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '8px', marginRight: '10px' }} />}
+            <strong>{p.name}</strong> - {p.price} د.م.
+          </div>
+          <button onClick={() => deleteProduct(p.id)} style={{ background: '#DC3545', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px' }}>🗑️ حذف</button>
         </div>
       ))}
     </div>
   );
-                  }
+          }
