@@ -12,25 +12,16 @@ export default function Products() {
     if (stored && JSON.parse(stored).length > 0) {
       setProducts(JSON.parse(stored));
     } else {
-      // منتجات افتراضية كبداية
       setProducts([
-        { id: 1, name: 'زربية بوشرويط', price: 4500, description: 'زربية تقليدية', image: '🪢' },
-        { id: 2, name: 'حقيبة يد', price: 700, description: 'جلد بقر', image: '👜' },
+        { id: 1, name: 'تحفة الأطلس الكبير', price: 700, description: 'شجرة الحياة - 1.50/60 سم', image: '🪢' },
+        { id: 2, name: 'زربية الأطلس الكبير أمزميز', price: 5500, description: 'زربية حمراء بقصة الزلزال', image: '🔴' },
+        { id: 3, name: 'حقيبة يد', price: 700, description: 'جلد بقر ومنتوجات نباتية', image: '👜' },
+        { id: 4, name: 'طاقم حقيبة يد', price: 1200, description: 'حقيبتان (صغير + متوسط)', image: '👜' },
+        { id: 5, name: 'طبق نباتات مجففة', price: 150, description: 'حسب الطلب', image: '🍽️' },
+        { id: 6, name: 'طبق نباتات جافة للمطبخ', price: 2000, description: 'حسب الطلب', image: '🏺' }
       ]);
     }
   }, []);
-
-  const getName = (product) => {
-    if (language === 'fr') return product.nameFr || product.name;
-    if (language === 'en') return product.nameEn || product.name;
-    return product.name;
-  };
-
-  const getDescription = (product) => {
-    if (language === 'fr') return product.descriptionFr || product.description;
-    if (language === 'en') return product.descriptionEn || product.description;
-    return product.description;
-  };
 
   return (
     <section id="products" style={{ padding: '60px 0', background: '#FFFDD0' }}>
@@ -50,15 +41,11 @@ export default function Products() {
               textAlign: 'center',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
             }}>
-              {product.image && product.image.startsWith('data:image') ? (
-                <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '12px' }} />
-              ) : (
-                <div style={{ fontSize: '60px' }}>{product.image || '🧵'}</div>
-              )}
-              <h3>{getName(product)}</h3>
-              <p style={{ fontSize: '13px', color: '#666' }}>{getDescription(product)}</p>
+              <div style={{ fontSize: '60px' }}>{product.image}</div>
+              <h3>{product.name}</h3>
+              <p style={{ fontSize: '13px', color: '#666' }}>{product.description}</p>
               <p style={{ color: '#D2691E', fontWeight: 'bold' }}>{product.price} {t('products.price')}</p>
-              <button onClick={() => addToCart({ ...product, name: getName(product) })} style={{
+              <button onClick={() => addToCart(product)} style={{
                 background: '#8B0000', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '30px', cursor: 'pointer', marginTop: '10px'
               }}>{t('products.add')}</button>
             </div>
@@ -67,4 +54,4 @@ export default function Products() {
       </div>
     </section>
   );
-              }
+                                                                 }
