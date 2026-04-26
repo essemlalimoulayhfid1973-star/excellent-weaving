@@ -1,72 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
-
-const products = [
-  {
-    id: 1,
-    name: 'زربية أمازيغية أصلية',
-    nameFr: 'Tapis Amazigh Authentique',
-    nameEn: 'Authentic Amazigh Rug',
-    price: 5500,
-    description: 'زربية من صوف الأغنام الطبيعي، صناعة يدوية 100%',
-    image: '🪢',
-  },
-  {
-    id: 2,
-    name: 'حقيبة يد جلدية - طراز أمازيغي',
-    nameFr: 'Sac en cuir - Style Amazigh',
-    nameEn: 'Leather Bag - Amazigh Style',
-    price: 850,
-    description: 'حقيبة يد من الجلد الطبيعي، مزينة بتطريز أمازيغي',
-    image: '👜',
-  },
-  {
-    id: 3,
-    name: 'حقيبة يد جلدية - صحراوية',
-    nameFr: 'Sac en cuir - Désert',
-    nameEn: 'Leather Bag - Desert Style',
-    price: 750,
-    description: 'حقيبة يد بتصميم صحراوي، عملية وأنيقة',
-    image: '👜',
-  },
-  {
-    id: 4,
-    name: 'طبق نجيلي - نقش أمازيغي',
-    nameFr: 'Plat en joncs - Motif Amazigh',
-    nameEn: 'Wicker Plate - Amazigh Pattern',
-    price: 350,
-    description: 'طبق يدوي من ألياف النجيل',
-    image: '🍽️',
-  },
-  {
-    id: 5,
-    name: 'طبق نجيلي - مجموعة السلة',
-    nameFr: 'Plat en joncs - Ensemble',
-    nameEn: 'Wicker Plate - Set',
-    price: 450,
-    description: 'طبق نجيلي بتصميم السلة التقليدية',
-    image: '🧺',
-  },
-  {
-    id: 6,
-    name: 'طبق نجيلي - فاخر',
-    nameFr: 'Plat en joncs - Luxe',
-    nameEn: 'Wicker Plate - Luxury',
-    price: 550,
-    description: 'طبق نجيلي فاخر بنقوش دقيقة',
-    image: '🏺',
-  },
-];
 
 export default function Products() {
   const { language, t } = useLanguage();
   const { addToCart } = useCart();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('tisaj_products');
+    if (stored && JSON.parse(stored).length > 0) {
+      setProducts(JSON.parse(stored));
+    } else {
+      // منتجات افتراضية كبداية
+      setProducts([
+        { id: 1, name: 'زربية بوشرويط', price: 4500, description: 'زربية تقليدية', image: '🪢' },
+        { id: 2, name: 'حقيبة يد', price: 700, description: 'جلد بقر', image: '👜' },
+      ]);
+    }
+  }, []);
 
   const getName = (product) => {
-    if (language === 'fr') return product.nameFr;
-    if (language === 'en') return product.nameEn;
+    if (language === 'fr') return product.nameFr || product.name;
+    if (language === 'en') return product.nameEn || product.name;
     return product.name;
+  };
+
+  const getDescription = (product) => {
+    if (language === 'fr') return product.descriptionFr || product.description;
+    if (language === 'en') return product.descriptionEn || product.description;
+    return product.description;
   };
 
   return (
@@ -87,27 +50,21 @@ export default function Products() {
               textAlign: 'center',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
             }}>
-              <div style={{ fontSize: '60px' }}>{product.image}</div>
+              {product.image && product.image.startsWith('data:image') ? (
+                <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '12px' }} />
+              ) : (
+                <div style={{ fontSize: '60px' }}>{product.image || '🧵'}</div>
+              )}
               <h3>{getName(product)}</h3>
+              <p style={{ fontSize: '13px', color: '#666' }}>{getDescription(product)}</p>
               <p style={{ color: '#D2691E', fontWeight: 'bold' }}>{product.price} {t('products.price')}</p>
-              <button 
-                onClick={() => addToCart({ ...product, name: getName(product) })} 
-                style={{
-                  background: '#8B0000',
-                  color: 'white',
-                  border: 'none',
-                  padding: '10px 20px',
-                  borderRadius: '30px',
-                  cursor: 'pointer',
-                  marginTop: '10px'
-                }}
-              >
-                {t('products.add')}
-              </button>
+              <button onClick={() => addToCart({ ...product, name: getName(product) })} style={{
+                background: '#8B0000', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '30px', cursor: 'pointer', marginTop: '10px'
+              }}>{t('products.add')}</button>
             </div>
           ))}
         </div>
       </div>
     </section>
   );
-}
+              }
