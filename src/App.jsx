@@ -11,15 +11,9 @@ import { LanguageProvider } from './contexts/LanguageContext';
 const Home = lazy(() => import('./pages/Home'));
 
 const PageLoader = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'var(--cream-light)' }}>
-    <div style={{ fontSize: '60px', animation: 'spin 1s linear infinite' }}>🧵</div>
-    <p style={{ marginRight: '15px', fontSize: '18px' }}>جاري تحميل التراث الأمازيغي...</p>
-    <style>{`
-      @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-    `}</style>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div style={{ fontSize: '48px' }}>🧵</div>
+    <p style={{ marginRight: '10px' }}>جاري التحميل...</p>
   </div>
 );
 
@@ -31,7 +25,7 @@ function App() {
           <Helmet>
             <html lang="ar" dir="rtl" />
             <title>تعاونية النسيج الممتاز | أمزميز الحوز</title>
-            <meta name="description" content="تعاونية النسيج الممتاز بأمزميز الحوز - أكثر من 500 امرأة من 20 قرية في جبال الأطلس الكبير" />
+            <meta name="description" content="تعاونية النسيج الممتاز - أكثر من 500 امرأة حرفية من 20 قرية" />
           </Helmet>
           <Header />
           <Suspense fallback={<PageLoader />}>
