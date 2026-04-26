@@ -117,4 +117,25 @@ export default function Hero() {
     </section>
   );
                                       }
+<div style={{
+  display: 'flex',
+  justifyContent: 'center',
+  gap: '30px',
+  marginTop: '30px',
+  flexWrap: 'wrap'
+}}>
+  <div style={{ textAlign: 'center' }}>
+    <span style={{ fontSize: '28px' }}>🧵</span>
+    <p style={{ fontSize: '14px', marginTop: '5px' }}>100% Handmade</p>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <span style={{ fontSize: '28px' }}>🏔️</span>
+    <p style={{ fontSize: '14px', marginTop: '5px' }}>Atlas Origin</p>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <span style={{ fontSize: '28px' }}>⭐</span>
+    <p style={{ fontSize: '14px', marginTop: '5px' }}>الخيارات الثالثة</p>
+  </div>
+</div>
+
 
