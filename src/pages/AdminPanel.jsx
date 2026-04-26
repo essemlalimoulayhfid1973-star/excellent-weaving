@@ -6,14 +6,9 @@ export default function AdminPanel() {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     name: '',
-    nameFr: '',
-    nameEn: '',
     price: '',
     description: '',
-    descriptionFr: '',
-    descriptionEn: '',
-    image: '',
-    category: ''
+    image: ''
   });
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,7 +19,7 @@ export default function AdminPanel() {
       setIsAuthenticated(true);
       localStorage.setItem('adminAuth', 'true');
     } else {
-      alert('كلمة السر غير صحيحة');
+      alert('كلمة السر خطأ');
     }
   };
 
@@ -39,10 +34,21 @@ export default function AdminPanel() {
     if (auth === 'true') setIsAuthenticated(true);
     const stored = localStorage.getItem('tisaj_products');
     if (stored) setProducts(JSON.parse(stored));
+    else {
+      // منتجات افتراضية
+      setProducts([
+        { id: 1, name: 'تحفة الأطلس الكبير', price: 700, description: 'شجرة الحياة - 1.50/60 سم', image: '🪢' },
+        { id: 2, name: 'زربية الأطلس الكبير', price: 5500, description: 'زربية حمراء بقصة الزلزال', image: '🔴' },
+        { id: 3, name: 'حقيبة يد', price: 700, description: 'جلد بقر ومنتوجات نباتية', image: '👜' },
+        { id: 4, name: 'طاقم حقيبة يد', price: 1200, description: 'حقيبتان (صغير + متوسط)', image: '👜' },
+        { id: 5, name: 'طبق نباتات مجففة', price: 150, description: 'حسب الطلب', image: '🍽️' },
+        { id: 6, name: 'طبق نباتات جافة', price: 2000, description: 'حسب الطلب', image: '🏺' }
+      ]);
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('tisaj_products', JSON.stringify(products));
+    if (products.length > 0) localStorage.setItem('tisaj_products', JSON.stringify(products));
   }, [products]);
 
   const handleImageUpload = (e) => {
@@ -61,21 +67,22 @@ export default function AdminPanel() {
       alert('الاسم والسعر مطلوبين');
       return;
     }
-    setProducts([...products, { ...newProduct, id: Date.now() }]);
-    setNewProduct({ name: '', nameFr: '', nameEn: '', price: '', description: '', descriptionFr: '', descriptionEn: '', image: '', category: '' });
+    setProducts([...products, { ...newProduct, id: Date.now(), image: newProduct.image || '🧵' }]);
+    setNewProduct({ name: '', price: '', description: '', image: '' });
     alert('✅ تمت إضافة المنتج');
   };
 
   const deleteProduct = (id) => {
     if (window.confirm('تأكيد الحذف؟')) {
       setProducts(products.filter(p => p.id !== id));
+      alert('🗑️ تم الحذف');
     }
   };
 
   if (!isAuthenticated) {
     return (
       <div style={{ padding: '50px', textAlign: 'center' }}>
-        <h2>🔐 لوحة التحكم</h2>
+        <h2>🔐 لوحة تحكم التعاونية</h2>
         <form onSubmit={handleLogin}>
           <input type="password" placeholder="كلمة السر" value={password} onChange={(e) => setPassword(e.target.value)} style={{ padding: '10px', margin: '10px' }} />
           <button type="submit">دخول</button>
@@ -88,39 +95,34 @@ export default function AdminPanel() {
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>🧵 لوحة تحكم التعاونية</h1>
-        <button onClick={logout} style={{ background: '#8B0000', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px' }}>تسجيل خروج</button>
+        <h1>🧵 لوحة التحكم</h1>
+        <button onClick={logout} style={{ background: '#8B0000', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>تسجيل خروج</button>
       </div>
 
       <div style={{ border: '1px solid #ddd', padding: '20px', margin: '20px 0', borderRadius: '12px' }}>
-        <h3>➕ إضافة منتج جديد</h3>
-        
-        <input type="text" placeholder="الاسم (عربي)" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
-        <input type="text" placeholder="Nom (Français)" value={newProduct.nameFr} onChange={(e) => setNewProduct({ ...newProduct, nameFr: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
-        <input type="text" placeholder="Name (English)" value={newProduct.nameEn} onChange={(e) => setNewProduct({ ...newProduct, nameEn: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
-        
-        <input type="number" placeholder="السعر (درهم)" value={newProduct.price} onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
-        
-        <textarea placeholder="الوصف (عربي)" value={newProduct.description} onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} rows="2" style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
-        <textarea placeholder="Description (Français)" value={newProduct.descriptionFr} onChange={(e) => setNewProduct({ ...newProduct, descriptionFr: e.target.value })} rows="2" style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
-        <textarea placeholder="Description (English)" value={newProduct.descriptionEn} onChange={(e) => setNewProduct({ ...newProduct, descriptionEn: e.target.value })} rows="2" style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
-        
+        <h3>إضافة منتج جديد</h3>
+        <input type="text" placeholder="الاسم" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        <input type="number" placeholder="السعر" value={newProduct.price} onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
+        <textarea placeholder="الوصف" value={newProduct.description} onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} rows="2" style={{ width: '100%', padding: '8px', margin: '5px 0' }} />
         <input type="file" accept="image/*" onChange={handleImageUpload} style={{ margin: '10px 0' }} />
         {newProduct.image && <img src={newProduct.image} alt="preview" style={{ width: '100px', marginTop: '10px' }} />}
-        
-        <button onClick={addProduct} style={{ background: '#28A745', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '8px', marginTop: '10px' }}>💾 حفظ المنتج</button>
+        <button onClick={addProduct} style={{ background: '#28A745', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '8px', marginTop: '10px', cursor: 'pointer' }}>💾 حفظ المنتج</button>
       </div>
 
-      <h3>📦 المنتجات الحالية ({products.length})</h3>
+      <h3>المنتجات الحالية ({products.length})</h3>
       {products.map(p => (
         <div key={p.id} style={{ borderBottom: '1px solid #ddd', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            {p.image && <img src={p.image} alt={p.name} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '8px', marginRight: '10px' }} />}
+            {p.image && p.image.startsWith('data:image') ? (
+              <img src={p.image} alt={p.name} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '8px', marginRight: '10px' }} />
+            ) : (
+              <span style={{ fontSize: '24px', marginRight: '10px' }}>{p.image}</span>
+            )}
             <strong>{p.name}</strong> - {p.price} د.م.
           </div>
-          <button onClick={() => deleteProduct(p.id)} style={{ background: '#DC3545', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px' }}>🗑️ حذف</button>
+          <button onClick={() => deleteProduct(p.id)} style={{ background: '#DC3545', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer' }}>🗑️ حذف</button>
         </div>
       ))}
     </div>
   );
-          }
+         }
