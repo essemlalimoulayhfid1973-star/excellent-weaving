@@ -6,7 +6,7 @@ export default function Cart() {
   const [isOpen, setIsOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('cod');
 
-  const sendWhatsAppOrder = () => {
+  const sendWhatsAppOrder = (method) => {
     if (cart.length === 0) {
       alert('السلة فارغة');
       return;
@@ -17,7 +17,7 @@ export default function Cart() {
       message += `\n• ${item.name} (${item.quantity}) × ${item.price} = ${(item.quantity * item.price).toLocaleString()} د.م.`;
     });
     message += `\n━━━━━━━━━━━━━━━━━━━━━\n💰 الإجمالي: ${totalPrice.toLocaleString()} د.م.`;
-    message += `\n💳 طريقة الدفع: ${paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'PayPal'}`;
+    message += `\n💳 طريقة الدفع: ${method === 'cod' ? 'الدفع عند الاستلام' : 'PayPal'}`;
     message += `\n━━━━━━━━━━━━━━━━━━━━━\n📞 بيانات التواصل:`;
     
     const name = prompt('👤 أدخلي اسمك الكريم:', '');
@@ -36,8 +36,8 @@ export default function Cart() {
   };
 
   const handlePayPal = () => {
-    alert('سيتم تحويلك إلى PayPal لإتمام الدفع');
-    sendWhatsAppOrder();
+    alert('سيتم تحويلك إلى PayPal لإتمام الدفع الآمن');
+    sendWhatsAppOrder('paypal');
   };
 
   return (
@@ -85,16 +85,18 @@ export default function Cart() {
                 <div style={{ marginBottom: '15px' }}>
                   <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold' }}>💳 طريقة الدفع:</label>
                   <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ddd' }}>
-                    <option value="cod">الدفع عند الاستلام</option>
-                    <option value="paypal">PayPal</option>
+                    <option value="cod">💰 الدفع عند الاستلام (المغرب فقط)</option>
+                    <option value="paypal">🌍 PayPal (دولياً)</option>
                   </select>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
                   <strong>الإجمالي:</strong> <strong>{totalPrice.toLocaleString()} د.م.</strong>
                 </div>
-                <button onClick={paymentMethod === 'cod' ? sendWhatsAppOrder : handlePayPal} style={{
+                <button onClick={() => paymentMethod === 'cod' ? sendWhatsAppOrder('cod') : handlePayPal()} style={{
                   width: '100%', background: '#25D366', color: 'white', border: 'none', padding: '12px', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold'
-                }}>📱 تأكيد الطلب عبر واتساب</button>
+                }}>
+                  📱 تأكيد الطلب ({paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'PayPal'})
+                </button>
               </div>
             )}
           </div>
@@ -102,4 +104,4 @@ export default function Cart() {
       )}
     </>
   );
-                         }
+}
