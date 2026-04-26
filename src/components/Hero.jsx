@@ -137,5 +137,8 @@ export default function Hero() {
     <p style={{ fontSize: '14px', marginTop: '5px' }}>الخيارات الثالثة</p>
   </div>
 </div>
-
+<div style={{ textAlign: 'center' }}>
+  <span style={{ fontSize: '28px' }}>🎨</span>
+  <p style={{ fontSize: '14px', marginTop: '5px' }}>خيارات تصميم متعددة</p>
+</div>
 
