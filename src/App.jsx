@@ -18,15 +18,14 @@ const PageLoader = () => (
   </div>
 );
 
-export default function App() {
-  // --- إضافة المسؤول الوحيد (Admin) ---
+function App() {
+  // نظام تسجيل الدخول للوحة التحكم
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminPassword, setAdminPassword] = useState('');
   const [showAdminLogin, setShowAdminLogin] = useState(false);
 
   const handleAdminLogin = (e) => {
     e.preventDefault();
-    // كلمة السر (123456) هي فقط للتجربة. يمكنك تغييرها لاحقاً.
     if (adminPassword === '123456') {
       setIsAdmin(true);
       setShowAdminLogin(false);
@@ -46,11 +45,22 @@ export default function App() {
     if (!isAdmin) {
       return (
         <div style={{ textAlign: 'center', padding: '50px' }}>
-          <h2>يجب تسجيل الدخول أولاً</h2>
+          <h2>🔐 لوحة التحكم محمية</h2>
+          <p>الرجاء إدخال كلمة السر للمتابعة</p>
           <form onSubmit={handleAdminLogin}>
-            <input type="password" placeholder="كلمة السر" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} />
-            <button type="submit">دخول</button>
+            <input 
+              type="password" 
+              placeholder="أدخل كلمة السر" 
+              value={adminPassword} 
+              onChange={(e) => setAdminPassword(e.target.value)} 
+              style={{ padding: '10px', marginBottom: '10px', width: '250px' }}
+            />
+            <br />
+            <button type="submit" style={{ padding: '10px 30px', background: '#8B0000', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>
+              دخول
+            </button>
           </form>
+          <p style={{ marginTop: '20px', fontSize: '12px', color: '#888' }}>كلمة السر التجريبية: 123456</p>
         </div>
       );
     }
@@ -84,3 +94,5 @@ export default function App() {
     </LanguageProvider>
   );
 }
+
+export default App;
