@@ -5,6 +5,23 @@ export default function Cart() {
   const { cart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('cod');
+  const [shipping, setShipping] = useState('local');
+  const [shippingCost, setShippingCost] = useState(50);
+
+  const shippingOptions = {
+    local: { name: 'المغرب', cost: 50 },
+    france: { name: 'فرنسا', cost: 250 },
+    spain: { name: 'إسبانيا', cost: 250 },
+    usa: { name: 'أمريكا', cost: 350 },
+    gulf: { name: 'الخليج', cost: 300 }
+  };
+
+  const handleShippingChange = (value) => {
+    setShipping(value);
+    setShippingCost(shippingOptions[value].cost);
+  };
+
+  const finalTotal = totalPrice + shippingCost;
 
   const sendWhatsAppOrder = (method) => {
     if (cart.length === 0) {
@@ -16,17 +33,20 @@ export default function Cart() {
     cart.forEach(item => {
       message += `\n• ${item.name} (${item.quantity}) × ${item.price} = ${(item.quantity * item.price).toLocaleString()} د.م.`;
     });
-    message += `\n━━━━━━━━━━━━━━━━━━━━━\n💰 الإجمالي: ${totalPrice.toLocaleString()} د.م.`;
+    message += `\n━━━━━━━━━━━━━━━━━━━━━\n📦 الشحن (${shippingOptions[shipping].name}): ${shippingCost} د.م.`;
+    message += `\n💰 الإجمالي النهائي: ${finalTotal.toLocaleString()} د.م.`;
     message += `\n💳 طريقة الدفع: ${method === 'cod' ? 'الدفع عند الاستلام' : 'PayPal'}`;
     message += `\n━━━━━━━━━━━━━━━━━━━━━\n📞 بيانات التواصل:`;
     
     const name = prompt('👤 أدخلي اسمك الكريم:', '');
     const phone = prompt('📱 أدخلي رقم هاتفك:', '06xxxxxxxx');
     const address = prompt('📍 أدخلي عنوانك الكامل:', '');
+    const city = prompt('🏙️ أدخلي مدينتك:', '');
     
     if (name) message += `\n👤 الاسم: ${name}`;
     if (phone) message += `\n📞 الهاتف: ${phone}`;
     if (address) message += `\n📍 العنوان: ${address}`;
+    if (city) message += `\n🏙️ المدينة: ${city}`;
     message += `\n✨ نشكرك على ثقتك في تعاونية النسيج الممتاز!`;
     
     window.open(`https://wa.me/212639674902?text=${encodeURIComponent(message)}`, '_blank');
@@ -36,7 +56,7 @@ export default function Cart() {
   };
 
   const handlePayPal = () => {
-    alert('سيتم تحويلك إلى PayPal لإتمام الدفع الآمن');
+    alert(`سيتم تحويلك إلى PayPal لإتمام الدفع الآمن\nالمبلغ الإجمالي: ${finalTotal} د.م.`);
     sendWhatsAppOrder('paypal');
   };
 
@@ -83,15 +103,30 @@ export default function Cart() {
             {cart.length > 0 && (
               <div style={{ padding: '20px', borderTop: '1px solid #eee' }}>
                 <div style={{ marginBottom: '15px' }}>
+                  <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold' }}>📍 منطقة الشحن:</label>
+                  <select value={shipping} onChange={(e) => handleShippingChange(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ddd' }}>
+                    <option value="local">🇲🇦 المغرب - 50 د.م.</option>
+                    <option value="france">🇫🇷 فرنسا - 250 د.م.</option>
+                    <option value="spain">🇪🇸 إسبانيا - 250 د.م.</option>
+                    <option value="usa">🇺🇸 أمريكا - 350 د.م.</option>
+                    <option value="gulf">🇦🇪 الخليج - 300 د.م.</option>
+                  </select>
+                </div>
+
+                <div style={{ marginBottom: '15px' }}>
                   <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold' }}>💳 طريقة الدفع:</label>
                   <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ddd' }}>
                     <option value="cod">💰 الدفع عند الاستلام (المغرب فقط)</option>
                     <option value="paypal">🌍 PayPal (دولياً)</option>
                   </select>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
-                  <strong>الإجمالي:</strong> <strong>{totalPrice.toLocaleString()} د.م.</strong>
+
+                <div style={{ marginBottom: '15px' }}>
+                  <div>💰 المجموع: {totalPrice.toLocaleString()} د.م.</div>
+                  <div>📦 الشحن: {shippingCost} د.م.</div>
+                  <div style={{ fontWeight: 'bold', fontSize: '18px', marginTop: '10px' }}>💵 الإجمالي: {finalTotal.toLocaleString()} د.م.</div>
                 </div>
+
                 <button onClick={() => paymentMethod === 'cod' ? sendWhatsAppOrder('cod') : handlePayPal()} style={{
                   width: '100%', background: '#25D366', color: 'white', border: 'none', padding: '12px', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold'
                 }}>
@@ -104,4 +139,4 @@ export default function Cart() {
       )}
     </>
   );
-}
+           }
