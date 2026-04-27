@@ -5,31 +5,27 @@ const LanguageContext = createContext();
 const translations = {
   ar: {
     nav: { home: 'الرئيسية', products: 'المنتجات', gallery: 'المعرض', story: 'حكايتنا' },
-    hero: { title: 'روح الأطلس في كل خيط', subtitle: 'أكثر من 500 امرأة حرفية', cta: 'تسوق الآن' },
+    hero: { title: 'روح الأطلس في كل خيط', cta: 'تسوق الآن' },
     products: { title: 'منتجاتنا', add: 'أضف للسلة', price: 'د.م.' },
-    cart: { title: 'سلة التسوق', empty: 'السلة فارغة', total: 'الإجمالي', checkout: 'تأكيد الطلب' },
-    footer: { rights: 'جميع الحقوق محفوظة', contact: 'اتصل بنا' }
+    cart: { title: 'سلة التسوق', empty: 'السلة فارغة', total: 'الإجمالي', checkout: 'تأكيد الطلب' }
   },
   fr: {
     nav: { home: 'Accueil', products: 'Produits', gallery: 'Galerie', story: 'Notre Histoire' },
-    hero: { title: "L'âme de l'Atlas", subtitle: '500 femmes artisanes', cta: 'Acheter' },
+    hero: { title: "L'âme de l'Atlas", cta: 'Acheter' },
     products: { title: 'Nos produits', add: 'Ajouter', price: 'DH' },
-    cart: { title: 'Panier', empty: 'Panier vide', total: 'Total', checkout: 'Valider' },
-    footer: { rights: 'Tous droits réservés', contact: 'Contactez-nous' }
+    cart: { title: 'Panier', empty: 'Panier vide', total: 'Total', checkout: 'Valider' }
   },
   en: {
     nav: { home: 'Home', products: 'Products', gallery: 'Gallery', story: 'Our Story' },
-    hero: { title: 'Soul of the Atlas', subtitle: '500+ Women Artisans', cta: 'Shop Now' },
+    hero: { title: 'Soul of the Atlas', cta: 'Shop Now' },
     products: { title: 'Our Products', add: 'Add to Cart', price: 'MAD' },
-    cart: { title: 'Cart', empty: 'Cart is empty', total: 'Total', checkout: 'Checkout' },
-    footer: { rights: 'All rights reserved', contact: 'Contact us' }
+    cart: { title: 'Cart', empty: 'Cart is empty', total: 'Total', checkout: 'Checkout' }
   },
   ber: {
     nav: { home: 'ⵜⴰⵙⵏⴰ', products: 'ⵉⵎⵓⵔⴰⵔ', gallery: 'ⵜⴰⵡⵍⴰⴼⵜ', story: 'ⴰⵎⵣⵔⵓⵢ' },
-    hero: { title: 'ⵜⴰⵎⵙⵎⵓⵏⵜ', subtitle: 'ⵓⴳⴰⵔ ⵏ 500 ⵏ ⵜⴰⵡⵙⵏⴰ', cta: 'ⴰⵖⵓⵍ' },
+    hero: { title: 'ⵜⴰⵎⵙⵎⵓⵏⵜ', cta: 'ⴰⵖⵓⵍ' },
     products: { title: 'ⵉⵎⵓⵔⴰⵔ', add: 'ⵔⵏⵓ', price: 'ⴰⵖⵔⵓⴷ' },
-    cart: { title: 'ⵜⴰⵙⵏⴰⵢⵜ', empty: 'ⵜⴰⵙⵏⴰⵢⵜ ⵜⴰⴳⴷⵓⴷⴰⵏⵜ', total: 'ⴰⵖⵔⵓⴷ', checkout: 'ⴰⵔⴰⵔ' },
-    footer: { rights: 'ⴰⴽⴽⴰ ⵉⵣⵔⴼⴰⵏ', contact: 'ⴰⵣⵣⵔⴰⵢ' }
+    cart: { title: 'ⵜⴰⵙⵏⴰⵢⵜ', empty: 'ⵜⴰⵙⵏⴰⵢⵜ ⵜⴰⴳⴷⵓⴷⴰⵏⵜ', total: 'ⴰⵖⵔⵓⴷ', checkout: 'ⴰⵔⴰⵔ' }
   }
 };
 
