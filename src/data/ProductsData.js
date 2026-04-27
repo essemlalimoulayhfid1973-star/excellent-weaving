@@ -79,3 +79,22 @@ export const productsData = [
   }
 ];
 export default productsData;
+export const productsData = [
+  {
+    id: 1,
+    name: "تحفة الأطلس الكبير",
+    slug: "masterpiece-of-grand-atlas",
+    price: 700,
+    description: "زربية تحمل رمز 'شجرة الحياة'، تجسيد لقوة الطبيعة وإرادة نساء الأطلس.",
+    story: "هذه الزربية ليست مجرد قطعة أرضية، إنها حكاية امرأة من الحوز نسجت فيها أحلامها بعد الزلزال.",
+    features: ["🧵 100% Handmade", "🏔️ Atlas Origin", "⭐ منتج فاخر", "🎨 خيارات تصميم متعددة"],
+    images: ["/images/products/rug1-main.jpg"],
+    thumb: "/images/products/rug1-main.jpg",
+    category: "carpet",
+    inStock: true,
+    customizable: true,
+    options: ["المقاس", "اللون", "التصميم"],
+    reviews: []
+  }
+];
+export default productsData;
