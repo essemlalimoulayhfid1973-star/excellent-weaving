@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cairo:wght@300;400;500;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --red-deep: #8B0000;
@@ -20,47 +16,11 @@ body {
   background: var(--cream);
   color: var(--deep-indigo);
   direction: rtl;
-  position: relative;
 }
 
-/* خلفية تيفيناغ - زاهية ومتحركة */
-body::before {
-  content: "ⵣⵜⵉⴼⵉⵏⴰⵖ ⵣⵜⵉⴼⵉⵏⴰⵖ ⵣⵜⵉⴼⵉⵏⴰⵖ";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  font-size: 80px;
-  font-weight: bold;
-  color: rgba(139,0,0,0.05);
-  text-align: center;
-  pointer-events: none;
-  z-index: -1;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  line-height: 1.2;
-  font-family: monospace;
-  animation: floatBackground 20s infinite linear;
-}
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
 
-@keyframes floatBackground {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0.05; color: #8B0000; }
-  25% { transform: translateY(-20px) rotate(2deg); opacity: 0.08; color: #C18E3A; }
-  50% { transform: translateY(0) rotate(0deg); opacity: 0.06; color: #D2691E; }
-  75% { transform: translateY(20px) rotate(-2deg); opacity: 0.08; color: #1B263B; }
-  100% { transform: translateY(0) rotate(0deg); opacity: 0.05; color: #8B0000; }
-}
-
-h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+.container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
 
 .section-title {
   text-align: center;
@@ -86,22 +46,6 @@ h1, h2, h3, h4 {
   font-size: 28px;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, var(--red-deep), var(--orange-terracotta));
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.btn-primary:hover {
-  transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(139,0,0,0.3);
-}
-
 @media (max-width: 768px) {
   .section-title { font-size: 28px; }
-  body::before { font-size: 40px; }
 }
