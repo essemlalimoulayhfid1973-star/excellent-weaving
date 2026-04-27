@@ -1,7 +1,7 @@
 export const productsData = [
   {
     id: 1,
-    name: "تحفة الأطلس الكبير",
+    name: "زربية 1 - تحفة الأطلس",
     slug: "masterpiece-of-grand-atlas",
     price: 700,
     description: "زربية تحمل رمز شجرة الحياة، تجسيد لقوة الطبيعة",
@@ -14,7 +14,7 @@ export const productsData = [
   },
   {
     id: 2,
-    name: "زربية الأطلس الكبير أمزميز",
+    name: "زربية 2 - الأطلس الكبير",
     slug: "atlas-carpet-amizmiz",
     price: 5500,
     description: "زربية حمراء بزخرفة أمازيغية تحكي قصة زلزال الحوز.",
@@ -79,7 +79,7 @@ export const productsData = [
   },
   {
     id: 7,
-    name: "زربية تقليدية - شجرة الحياة",
+    name: "زربية 3 - شجرة الحياة",
     slug: "tree-of-life-handmade-rug",
     price: 500,
     description: "زربية صغيرة تحمل رمز شجرة الحياة",
