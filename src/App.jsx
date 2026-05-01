@@ -14,7 +14,6 @@ function App() {
   const [cart, setCart] = useState([]);
   const [view, setView] = useState('home');
 
-  // متابعة حالة تسجيل الدخول
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -23,7 +22,6 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // جلب المنتجات من Firestore
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'products'), (snapshot) => {
       const productsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -34,6 +32,7 @@ function App() {
 
   if (loading) return <div className="loading">جاري التحميل...</div>;
 
+  // ✅ هذا السطر يمرر products إلى AdminPanel
   if (view === 'admin' && user) {
     return <AdminPanel setView={setView} products={products} />;
   }
@@ -42,6 +41,7 @@ function App() {
     return <Cart cart={cart} setCart={setCart} setView={setView} />;
   }
 
+  // ✅ هذا السطر يمرر products إلى HomePage
   return (
     <HomePage
       user={user}
